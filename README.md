@@ -93,4 +93,4 @@ Once the window has appeared you have various options :
 - Arrows : to move on the grid
 - You can place an element by clicking on an empty place. If the place has an object, the click will delete it.
 
-
+I hope you'll have fun with this algorithm. Don't hesitate to make your own modifications. Have fun.
