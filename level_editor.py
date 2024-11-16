@@ -54,8 +54,8 @@ class LevelEditor:
         self.floor.update()
         self.cursor.update()
         self.preview.update()
-        # for item in self.item_list:
-        #     item.update()
+        for item in self.item_list:
+            item.update()
 
         if self.cursor.click:
             x = self.grid.first_visible_bloc_index_x + (self.cursor.x - (self.grid.x+self.grid.space))//self.grid.space
@@ -180,6 +180,14 @@ class Grid:
         
 
     def update(self):
+        # if keyboard.is_pressed("up"):
+        #     self.y+=SPEED
+        # if keyboard.is_pressed("down"):
+        #     self.y-=SPEED
+        # if keyboard.is_pressed("right"):
+        #     self.x-=SPEED
+        # if keyboard.is_pressed("left"):
+        #     self.x+=SPEED
 
         if self.x <= -2*self.space:
             self.x += self.space
@@ -193,6 +201,7 @@ class Grid:
         if self.y > -self.space:
             self.y -= self.space
             self.first_visible_bloc_index_y-=1
+        # print(self.first_visible_bloc_index_x, self.first_visible_bloc_index_y)
 
 class Floor:
     def __init__(self, y_init):
@@ -243,6 +252,17 @@ class Item:
 
         self.x = x
         self.y = y
+        
+    def update(self):
+        pass
+        # if keyboard.is_pressed("up"):
+        #     self.y+=SPEED
+        # if keyboard.is_pressed("down"):
+        #     self.y-=SPEED
+        # if keyboard.is_pressed("right"):
+        #     self.x-=SPEED
+        # if keyboard.is_pressed("left"):
+        #     self.x+=SPEED
         
     def display(self, screen):
         

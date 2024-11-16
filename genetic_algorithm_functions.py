@@ -14,7 +14,7 @@ os.getcwd()
 
 
 class Trainer:
-    def __init__(self, screen, map_name, save_folder_path, base_model_path, batch_size):
+    def __init__(self, screen, map_name, save_folder_path, base_model_path, starting_generation, batch_size):
 
         
         self.save_floder_path = save_folder_path
@@ -49,7 +49,7 @@ class Trainer:
         self.spike_list = []
 
         self.iteration = 1
-        self.generation = 1
+        self.generation = starting_generation
 
         self.generation_best ={"death_time" : 0, "model" : [], "jump_count":0, "trigger_number":0}
         self.trigger_window_size = (500,500)
@@ -100,7 +100,7 @@ class Trainer:
         
 
     def load_player_configuration(self, name):
-        f = open(name+".txt", "r")
+        f = open(name, "r")
         text = ""
         for line in f:
             text += line
@@ -358,14 +358,14 @@ class Trainer:
 
         if self.iteration == self.batch_size:
 
-            self.original_node_list = self.load_player_configuration(self.save_floder_path +"/generation_"+str(self.generation)+"_best")
+            self.original_node_list = self.load_player_configuration(self.save_floder_path +"/generation_"+str(self.generation)+"_best.txt")
 
             self.node_list = configuration_copy(self.original_node_list, self.cube)
             self.generation += 1
             self.generation_best = 0
             self.iteration = 1
 
-            self.epsilon = max(10, self.epsilon-1)
+            self.epsilon = max(3, self.epsilon-1)
 
             print(" ")
             print("Generation : "+ str(self.generation))
@@ -406,7 +406,7 @@ class Trainer:
 
         if keyboard.is_pressed("e"):
             if (time.time()-self.last_change_epsilon>0.1):
-                self.epsilon = max(10, self.epsilon-1)
+                self.epsilon = max(3, self.epsilon-1)
                 print("Epsilon : " + str(self.epsilon))
                 self.last_change_epsilon = time.time()
 
@@ -416,7 +416,7 @@ class Trainer:
             if not self.cube.dead :
 
                 if self.time > 150:
-                    self.cube.dead = true
+                    self.cube.dead = True
                     self.speed = 0
 
                 self.cube.update(self.time, self.framerate)

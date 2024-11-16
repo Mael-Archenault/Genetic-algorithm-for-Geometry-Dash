@@ -5,8 +5,9 @@ class Floor:
     def __init__(self, y_init):
         self.y = y_init
         self.x = 0
+
         self.floor_img = pygame.image.load("./img/floor.png")
-        self.floor_rect = pygame.Rect(self.x,self.y, 1080,5) # floor hitbox
+        self.floor_rect = pygame.Rect(self.x,self.y, 1080,5)
 
     def update(self):
         self.floor_rect.update(self.x, self.y, 1080,10)
