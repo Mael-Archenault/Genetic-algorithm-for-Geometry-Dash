@@ -27,17 +27,17 @@ This project contains 3 differents modes :
 - Level editor : to have an easy access to level creation
 
 ## Detailled content
--/img: contains all png used for the project
--/maps: contains all maps with a .txt extension
--/save: contains models that I have already trained
--arial.ttf: font used to display time on the screen
--trigger_library.py: contains all classes concerning triggers and nodes
--map.py: contains the map class, to convert .txt to a playable map in the game
--object_library.py: contains classes relative to spikes and blocks, the 2 obstacles implemented in the game
--gamemodes.py: contains class describing all gamemodes we can play (only cube for the moment)
--level_editor.py: contains the class able to open and run the level editor
--genetic_algorithm_functions.py: contains the main training and testing functions for the genetic algorithm
--main.py: the file to write into to train and test models, as well as editing maps.
+- /img: contains all png used for the project
+- /maps: contains all maps with a .txt extension
+- /save: contains models that I have already trained
+- arial.ttf: font used to display time on the screen
+- trigger_library.py: contains all classes concerning triggers and nodes
+- map.py: contains the map class, to convert .txt to a playable map in the game
+- object_library.py: contains classes relative to spikes and blocks, the 2 obstacles implemented in the game
+- gamemodes.py: contains class describing all gamemodes we can play (only cube for the moment)
+- level_editor.py: contains the class able to open and run the level editor
+- genetic_algorithm_functions.py: contains the main training and testing functions for the genetic algorithm
+- main.py: the file to write into to train and test models, as well as editing maps.
 
 # User Manual
 
@@ -49,11 +49,11 @@ Download all files on the repository and place them in the same directory. The f
 
 ## Launch a training
 To launch a training, you will need to create an instance of class "Trainer" between the "user-code-begin" and "user-code-end". Arguments are the following:
--screen: the display surface that will be used to render objects. **Use the instance that were created before : screen**
--map_name: the name of the map that will be used. The map should be located in the directory "/maps".
--save_folder_path: the path to the folder where you want to store the models of the training. This path can be absolute or relative
--base_model_path: if you want to restart a training from a pre-existing model, place the path of the model in this argument. Otherwise type "None".
--batch_size: a number defining the number of individual for each generation
+- screen: the display surface that will be used to render objects. **Use the instance that were created before : screen**
+- map_name: the name of the map that will be used. The map should be located in the directory "/maps".
+- save_folder_path: the path to the folder where you want to store the models of the training. This path can be absolute or relative
+- base_model_path: if you want to restart a training from a pre-existing model, place the path of the model in this argument. Otherwise type "None".
+- batch_size: a number defining the number of individual for each generation
 
 Once the instance of "Trainer" is created, you only need to call (name of instance).run()
 
@@ -66,33 +66,33 @@ Each generation features a foundational model that serves as the basis for all o
 
 Epsilon is already decreased between each generation, to make sure the algorithm converges to a fixed solution. However, it can sometimes be useful to re-direct the training when we see a dead-end, by modifying value of Epsilon during the training.
 
--"right arrow": used to display sequentially all nodes of the current model
+- "right arrow": used to display sequentially all nodes of the current model
 
 ## Test a model
 
 In main.py, between the "user-code-begin" and "user-code-end", create an instance of "Tester" with arguments :
--screen: the display surface that will be used to render objects. **Use the instance that were created before : screen**
--map_name: the name of the map that will be used. The map should be located in the directory "/maps".
--model_path: the absolute or relative path to the model you want to test
+- screen: the display surface that will be used to render objects. **Use the instance that were created before : screen**
+- map_name: the name of the map that will be used. The map should be located in the directory "/maps".
+- model_path: the absolute or relative path to the model you want to test
 
 Once the instance is created, just run (name of instance).run()
 
 Once the window has appeared you have various options :
 - "c": stands for "collisions", toggle the display of the hitboxes of objects
--"right arrow": used to display sequentially all nodes of the current model
+- "right arrow": used to display sequentially all nodes of the current model
 - "up" or "space": only in this mode, you can jump with these keys
 
 ## Launch the editor
 
 In main.py, between the "user-code-begin" and "user-code-end", create an instance of "LevelEditor" with arguments :
--screen: the display surface that will be used to render objects. **Use the instance that were created before : screen**
--name: the name of the map you are working on (necessarily inside /maps). If the map already exists, it is modified. Otherwise, it is created.
+- screen: the display surface that will be used to render objects. **Use the instance that were created before : screen**
+- name: the name of the map you are working on (necessarily inside /maps). If the map already exists, it is modified. Otherwise, it is created.
 
 Once the instance is created, just run (name of instance).run()
 
 Once the window has appeared you have various options :
 - "n": stands for "next", it selects the next object as object to place. You can see a preview of the current object in the top-right corner.
--"s": to save the map
+- "s": to save the map
 - Arrows : to move on the grid
 - You can place an element by clicking on an empty place. If the place has an object, the click will delete it.
 
