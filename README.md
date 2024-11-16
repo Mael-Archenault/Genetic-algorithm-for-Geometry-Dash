@@ -2,16 +2,19 @@
 
 First I would like to give credit to who it is due. I did not have the idea for this project, I just watched a youtube video that I found amazing. I wanted to try the same concept to see if I could achieve different results.
 The youtube video : https://www.youtube.com/watch?v=MTcXW94V838&ab_channel=CodeBH
+
 The main objective of the project was to build a clone of the game Geometry Dash. In the aftermath, I implemented a genetic algorithm to create auto-players of the game.
 # Principle used
 This algorithm follows rules of a genetic algorithm:
--we run a game with generations of randomly generated "players"
--the best "player" of one given generation is used as a model to create the next generation
--we repeat until we get to a satisfying result
+
+- we run a game with generations of randomly generated "players"
+- the best "player" of one given generation is used as a model to create the next generation
+- we repeat until we get to a satisfying result
 
 To generate the behaviour of the player I used two items:
--triggers: they are the sensors of the "player". A trigger is activated if it is positioned over its target object (Example : a spike trigger will activate if the hitbox of the trigger touches the hitbox of a spike). There is also negative triggers, that are always activated except when they touch their target object.
--nodes: they are used to group triggers. One node is activated if all of its associated triggers are activated. Once the node is activated, the cube jumps.
+
+- triggers: they are the sensors of the "player". A trigger is activated if it is positioned over its target object (Example : a spike trigger will activate if the hitbox of the trigger touches the hitbox of a spike). There is also negative triggers, that are always activated except when they touch their target object.
+- nodes: they are used to group triggers. One node is activated if all of its associated triggers are activated. Once the node is activated, the cube jumps.
 
 With this method, we can generate random behaviour by generating random node/trigger configurations (type, position, association, etc...). Each node is locked relatively to the cube (so are the triggers)
 
