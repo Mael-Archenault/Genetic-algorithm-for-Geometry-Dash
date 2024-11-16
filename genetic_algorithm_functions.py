@@ -415,7 +415,7 @@ class Trainer:
         
             if not self.cube.dead :
 
-                if self.time > 150:
+                if self.time > 70:
                     self.cube.dead = True
                     self.speed = 0
 
@@ -803,6 +803,10 @@ class Tester:
 
     def update(self):
         if not self.cube.dead :
+
+            if self.time > 70:
+                    self.cube.dead = True
+                    self.speed = 0
 
             self.cube.update(self.time, self.framerate)
             #//////////////// Block row spawn
