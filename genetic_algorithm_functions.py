@@ -832,15 +832,15 @@ class Tester:
 
 
             #//////////////////////// Particles due to the bloc drifting on a surface
-            # if self.cube.collisions[0] and self.time -self.drift_particles_last_spawn > 1/15:
-            #     self.particle_list.append(Particle(self.cube.x, self.cube.y+45, self.time, self.speed/2, 175,180, 0.4, "square", [(255,255,255)], 90))
-            #     self.drift_particles_last_spawn = self.time
+            if self.cube.collisions[0] and self.time -self.drift_particles_last_spawn > 1/15:
+                self.particle_list.append(Particle(self.cube.x, self.cube.y+45, self.time, self.speed/2, 175,180, 0.4, "square", [(255,255,255)], 90))
+                self.drift_particles_last_spawn = self.time
 
 
-            # for particle in self.particle_list:
-            #     particle.update(self.time, False, self.framerate)
-            #     if not particle.active:
-            #         self.particle_list.remove(particle)
+            for particle in self.particle_list:
+                particle.update(self.time, False, self.framerate)
+                if not particle.active:
+                    self.particle_list.remove(particle)
             #//////////////////////////////////////////////////////////////////
 
             #///////////////////// updating the position of every block (and spikes)
