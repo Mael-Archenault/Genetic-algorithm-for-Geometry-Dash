@@ -160,7 +160,7 @@ class Trainer:
         result = configuration_copy(old_configuration, self.cube)
         for node in result:
             node.cube = self.cube
-        modified_parameters = random.randrange(4,epsilon+1)
+        modified_parameters = random.randrange(0,epsilon+1)
 
         for _ in range(modified_parameters):
             possibilities = ["nodes_number", "trigger_number", "trigger_number","trigger_position", "trigger_position", "trigger_position"]
@@ -416,23 +416,8 @@ class Trainer:
             if not self.cube.dead :
 
                 if self.time > 150:
-            
-                    trigger_number = 0
-                    for node in self.node_list:
-                        trigger_number+= len(node.trigger_list)
-            
-                    self.node_list = self.clean_configuration(self.node_list)
-                    self.cube.dead = True
+                    self.cube.dead = true
                     self.speed = 0
-                    
-                    self.generation_best = (150, self.node_list, self.cube.jump_count, trigger_number)
-                    self.save_player_configuration(self.generation_best, "generation_"+str(self.generation+1)+"_best")
-                    print("best player for the level :", self.cube.jump_count, trigger_number)
-                    
-                    print("ok, finished")
-                    # print("best player for generation "+str(self.generation)+": "+ str(death_time), self.cube.jump_count, trigger_number)
-                    self.running = False
-        
 
                 self.cube.update(self.time, self.framerate)
                 #//////////////// Block row spawn
