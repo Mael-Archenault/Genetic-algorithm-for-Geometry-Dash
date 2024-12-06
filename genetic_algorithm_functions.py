@@ -606,10 +606,8 @@ class Trainer:
             self.update()
             if self.activate_display:
                 self.display()
-            self.time += 1/self.framerate
-            if self.activate_display:
                 self.clock.tick(self.framerate)
-
+            self.time += 1/self.framerate
 
 class Tester:
     def __init__(self, screen, map_name, model_path):
