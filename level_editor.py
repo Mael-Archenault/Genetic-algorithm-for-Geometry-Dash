@@ -1,6 +1,6 @@
 from time import sleep
 import pygame
-import keyboard
+
 
 
 FRAMERATE = 120
@@ -26,24 +26,34 @@ class LevelEditor:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
-        if keyboard.is_pressed("s"):
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_n:
+                    self.preview.next_mode()
+        
+
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_s]:
             self.save_level()
             sleep(1)
             print("Level saved")
 
-        if keyboard.is_pressed("up"):
+        if keys[pygame.K_UP]:
             self.grid.y+=SPEED
             for item in self.item_list:
                 item.y+=SPEED
-        if keyboard.is_pressed("down"):
+            self.floor.y+=SPEED
+        if keys[pygame.K_DOWN]:
             self.grid.y-=SPEED
             for item in self.item_list:
                 item.y-=SPEED
-        if keyboard.is_pressed("right"):
-           self.grid.x-=SPEED
-           for item in self.item_list:
-                item.x-=SPEED
-        if keyboard.is_pressed("left"):
+            self.floor.y-=SPEED
+        if keys[pygame.K_RIGHT]:
+            self.grid.x-=SPEED
+            for item in self.item_list:
+                    item.x-=SPEED
+        if keys[pygame.K_LEFT]:
             self.grid.x+=SPEED
             for item in self.item_list:
                 item.x+=SPEED
@@ -51,11 +61,7 @@ class LevelEditor:
     def update(self):
         
         self.grid.update()
-        self.floor.update()
         self.cursor.update()
-        self.preview.update()
-        for item in self.item_list:
-            item.update()
 
         if self.cursor.click:
             x = self.grid.first_visible_bloc_index_x + (self.cursor.x - (self.grid.x+self.grid.space))//self.grid.space
@@ -150,7 +156,7 @@ class Cursor:
         self.click = False
 
     def update(self):
-        if pygame.mouse.get_pressed()[0] or keyboard.is_pressed("space"):
+        if pygame.mouse.get_pressed()[0] or pygame.K_SPACE in pygame.key.get_pressed():
             if not self.lately_pressed:
                 self.lately_pressed = True
                 self.click = True
@@ -180,14 +186,6 @@ class Grid:
         
 
     def update(self):
-        # if keyboard.is_pressed("up"):
-        #     self.y+=SPEED
-        # if keyboard.is_pressed("down"):
-        #     self.y-=SPEED
-        # if keyboard.is_pressed("right"):
-        #     self.x-=SPEED
-        # if keyboard.is_pressed("left"):
-        #     self.x+=SPEED
 
         if self.x <= -2*self.space:
             self.x += self.space
@@ -201,8 +199,7 @@ class Grid:
         if self.y > -self.space:
             self.y -= self.space
             self.first_visible_bloc_index_y-=1
-        # print(self.first_visible_bloc_index_x, self.first_visible_bloc_index_y)
-
+    
 class Floor:
     def __init__(self, y_init):
         self.y = y_init
@@ -210,12 +207,6 @@ class Floor:
 
         self.floor_img = pygame.image.load("./img/floor.png")
         
-
-    def update(self):
-        if keyboard.is_pressed("up"):
-            self.y+=SPEED
-        if keyboard.is_pressed("down"):
-            self.y-=SPEED
         
 
     def display(self, screen):
@@ -223,7 +214,6 @@ class Floor:
 
 class Preview:
     def __init__(self):
-        self.is_pressed = False
         self.preview_list = [("1", block),("2", spike), ("3", little_spike), ("4", reversed_spike), ("5", reversed_little_spike)]
         self.mode = ("1",block)
 
@@ -232,16 +222,6 @@ class Preview:
     def next_mode(self):
         self.mode = self.preview_list[(self.preview_list.index(self.mode)+1)%5]
 
-    def update(self):
-
-
-        if keyboard.is_pressed("n"):
-            if not self.is_pressed:
-                self.is_pressed = True
-                self.next_mode()
-            
-        else:
-            self.is_pressed = False
     def display(self, screen):
         screen.blit(self.mode[1], (1000, 30))      
 
@@ -253,17 +233,7 @@ class Item:
         self.x = x
         self.y = y
         
-    def update(self):
-        pass
-        # if keyboard.is_pressed("up"):
-        #     self.y+=SPEED
-        # if keyboard.is_pressed("down"):
-        #     self.y-=SPEED
-        # if keyboard.is_pressed("right"):
-        #     self.x-=SPEED
-        # if keyboard.is_pressed("left"):
-        #     self.x+=SPEED
-        
+    
     def display(self, screen):
         
         screen.blit(self.item_img, (self.x, self.y))

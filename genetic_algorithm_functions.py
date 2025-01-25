@@ -1,6 +1,6 @@
 import os
 import pygame
-import keyboard
+# import keyboard
 import random
 from math import*
 from map import Map
@@ -381,34 +381,37 @@ class Trainer:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
-        if keyboard.is_pressed("c"):
-            if (time.time() - self.last_change_collision_display) > 0.5:
-                self.collision_box = not(self.collision_box)
-                self.last_change_collision_display = time.time()
 
-        if keyboard.is_pressed("d"):
-            if (time.time() - self.last_change_overall_display) > 0.5:
-                self.activate_display= not(self.activate_display)
-                self.last_change_overall_display = time.time()
-                
+            if (event.type == pygame.KEYDOWN):
+
+                if event.key == pygame.K_c:
+                    if (time.time() - self.last_change_collision_display) > 0.5:
+                        self.collision_box = not(self.collision_box)
+                        self.last_change_collision_display = time.time()
+
+                if event.key == pygame.K_d:
+                    if (time.time() - self.last_change_overall_display) > 0.5:
+                        self.activate_display= not(self.activate_display)
+                        self.last_change_overall_display = time.time()
+                        
 
 
-        if keyboard.is_pressed("right"):
-            if (time.time()-self.last_change_node_display)>0.5:
-                self.change_node_display(False)
-                self.last_change_node_display = time.time()
+                if event.key == pygame.K_RIGHT:
+                    if (time.time()-self.last_change_node_display)>0.5:
+                        self.change_node_display(False)
+                        self.last_change_node_display = time.time()
 
-        if keyboard.is_pressed("r"):
-            if (time.time()-self.last_change_epsilon>0.1):
-                self.epsilon += 1
-                print("Epsilon : " + str(self.epsilon))
-                self.last_change_epsilon = time.time()
+                if event.key == pygame.K_r:
+                    if (time.time()-self.last_change_epsilon>0.1):
+                        self.epsilon += 1
+                        print("Epsilon : " + str(self.epsilon))
+                        self.last_change_epsilon = time.time()
 
-        if keyboard.is_pressed("e"):
-            if (time.time()-self.last_change_epsilon>0.1):
-                self.epsilon = max(3, self.epsilon-1)
-                print("Epsilon : " + str(self.epsilon))
-                self.last_change_epsilon = time.time()
+                if event.key == pygame.K_e:
+                    if (time.time()-self.last_change_epsilon>0.1):
+                        self.epsilon = max(3, self.epsilon-1)
+                        print("Epsilon : " + str(self.epsilon))
+                        self.last_change_epsilon = time.time()
 
     
     def update(self):
@@ -785,18 +788,21 @@ class Tester:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
-        if keyboard.is_pressed("c"):
-            if (time.time() - self.last_change_collision_display) > 0.5:
-                self.collision_box = not(self.collision_box)
-                self.last_change_collision_display = time.time()
-                
-        if keyboard.is_pressed("up") or keyboard.is_pressed("space"):
-            self.cube.jump = True
 
-        if keyboard.is_pressed("right"):
-            if (time.time()-self.last_change_node_display)>0.5:
-                self.change_node_display(False)
-                self.last_change_node_display = time.time()
+            if (event.type == pygame.KEYDOWN):
+
+                if event.key==pygame.K_c:
+                    if (time.time() - self.last_change_collision_display) > 0.5:
+                        self.collision_box = not(self.collision_box)
+                        self.last_change_collision_display = time.time()
+                        
+                if event.key==pygame.K_UP or event.key==pygame.K_SPACE:
+                    self.cube.jump = True
+
+                if event.key==pygame.K_RIGHT:
+                    if (time.time()-self.last_change_node_display)>0.5:
+                        self.change_node_display(False)
+                        self.last_change_node_display = time.time()
 
 
     def update(self):
