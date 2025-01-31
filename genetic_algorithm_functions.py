@@ -393,8 +393,6 @@ class Trainer:
                     if (time.time() - self.last_change_overall_display) > 0.5:
                         self.activate_display= not(self.activate_display)
                         self.last_change_overall_display = time.time()
-                        
-
 
                 if event.key == pygame.K_RIGHT:
                     if (time.time()-self.last_change_node_display)>0.5:
@@ -412,7 +410,6 @@ class Trainer:
                         self.epsilon = max(3, self.epsilon-1)
                         print("Epsilon : " + str(self.epsilon))
                         self.last_change_epsilon = time.time()
-
     
     def update(self):
         
@@ -795,16 +792,15 @@ class Tester:
                     if (time.time() - self.last_change_collision_display) > 0.5:
                         self.collision_box = not(self.collision_box)
                         self.last_change_collision_display = time.time()
-                        
-                if event.key==pygame.K_UP or event.key==pygame.K_SPACE:
-                    self.cube.jump = True
-
+                
                 if event.key==pygame.K_RIGHT:
                     if (time.time()-self.last_change_node_display)>0.5:
                         self.change_node_display(False)
                         self.last_change_node_display = time.time()
 
-
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
+            self.cube.jump = True
     def update(self):
         if not self.cube.dead :
 
