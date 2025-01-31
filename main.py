@@ -11,7 +11,7 @@ screen = pygame.display.set_mode((1080,720))
 # trainer = Trainer(screen, "level", "./temporary_saves",None,1, 1000)
 # trainer.run()
 
-tester = Tester(screen, "level" ,"./trained_models/level_model.txt")
+tester = Tester(screen, "stereo_madness" ,"./trained_models/stereo_madness_model.txt")
 tester.run()
 
 # level_editor = LevelEditor(screen, "level")
